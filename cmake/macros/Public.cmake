@@ -670,6 +670,7 @@ function(pxr_setup_python)
 endfunction() # pxr_setup_python
 
 function (pxr_create_test_module MODULE_NAME)
+  if (PXR_BUILD_TESTING)
     cmake_parse_arguments(tm "" "INSTALL_PREFIX;SOURCE_DIR" "" ${ARGN})
 
     if (NOT tm_SOURCE_DIR)
@@ -702,9 +703,11 @@ function (pxr_create_test_module MODULE_NAME)
                 tests/${tm_INSTALL_PREFIX}/lib/python/${MODULE_NAME}
         )
     endif()
+  endif()
 endfunction() # pxr_create_test_module
 
 function(pxr_build_test_shared_lib LIBRARY_NAME)
+  if (PXR_BUILD_TESTING)
     cmake_parse_arguments(bt
         "" ""
         "LIBRARIES;CPPFILES"
@@ -739,9 +742,11 @@ function(pxr_build_test_shared_lib LIBRARY_NAME)
         LIBRARY DESTINATION "tests/lib"
         ARCHIVE DESTINATION "tests/lib"
     )
+  endif()
 endfunction() # pxr_build_test_shared_lib
 
 function(pxr_build_test TEST_NAME)
+  if (PXR_BUILD_TESTING)
     cmake_parse_arguments(bt
         "" ""
         "LIBRARIES;CPPFILES"
@@ -767,9 +772,11 @@ function(pxr_build_test TEST_NAME)
     install(TARGETS ${TEST_NAME}
         RUNTIME DESTINATION "tests"
     )
+  endif()
 endfunction() # pxr_build_test
 
 function(pxr_test_scripts)
+  if (PXR_BUILD_TESTING)
     foreach(file ${ARGN})
         get_filename_component(destFile ${file} NAME_WE)
         install(
@@ -778,6 +785,7 @@ function(pxr_test_scripts)
             RENAME ${destFile}
         )
     endforeach()
+  endif()
 endfunction() # pxr_test_scripts
 
 function(pxr_install_test_dir)
@@ -795,6 +803,7 @@ function(pxr_install_test_dir)
 endfunction() # pxr_install_test_dir
 
 function(pxr_register_test TEST_NAME)
+  if (PXR_BUILD_TESTING)
     cmake_parse_arguments(bt
         "PYTHON" 
         "COMMAND;STDOUT_REDIRECT;STDERR_REDIRECT;DIFF_COMPARE;EXPECTED_RETURN_CODE;TESTENV"
@@ -862,6 +871,7 @@ function(pxr_register_test TEST_NAME)
         NAME ${TEST_NAME}
         COMMAND ${PYTHON_EXECUTABLE} ${testWrapperCmd} ${testCmd}
     )
+  endif()
 endfunction() # pxr_register_test
 
 function(pxr_setup_plugins)

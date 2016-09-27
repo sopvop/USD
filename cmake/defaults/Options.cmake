@@ -30,6 +30,8 @@ option(PXR_BUILD_MAYA_PLUGIN "Build usd maya plugin" OFF)
 option(PXR_BUILD_ALEMBIC_PLUGIN "Build the Alembic plugin for USD" OFF)
 option(PXR_MAYA_TBB_BUG_WORKAROUND "Turn on linker flag (-Wl,-Bsymbolic) to work around a Maya TBB bug" OFF)
 
+option(PXR_BUILD_TESTING "Build test" ON)
+
 set(PXR_INSTALL_LOCATION ""
     CACHE
     STRING
