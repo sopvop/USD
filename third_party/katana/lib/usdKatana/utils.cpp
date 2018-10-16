@@ -1760,6 +1760,8 @@ PxrUsdKatanaUtils::ConvertBoundsToAttribute(
             return FnKat::DoubleAttribute();
         }
 
+        using std::isinf;
+
         if ( isinf(min[0]) || isinf(min[1]) || isinf(min[2]) ||
             isinf(max[0]) || isinf(max[1]) || isinf(max[2]) ) {
             *hasInfiniteBounds = true;
