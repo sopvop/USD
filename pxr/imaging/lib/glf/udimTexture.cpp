@@ -239,6 +239,15 @@ GlfUdimTexture::_ReadImage()
         sizePerElem = 1;
     }
 
+    bool isSRGB = firstImageMips[0].image->IsColorSpaceSRGB();
+    if (isSRGB && internalFormat == GL_RGB8) {
+        internalFormat = GL_SRGB8;
+    }
+    else if (isSRGB && internalFormat == GL_RGBA8)
+    {
+        internalFormat = GL_SRGB8_ALPHA8;
+    }
+
     const unsigned int maxTileCount =
         std::get<0>(_tiles.back()) + 1;
     _depth = static_cast<int>(_tiles.size());
