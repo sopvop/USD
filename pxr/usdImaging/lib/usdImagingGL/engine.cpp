@@ -62,7 +62,7 @@ _GetHydraEnabledEnvVar()
 }
 
 static
-void _InitGL()
+void _InitGLOnce()
 {
     // Initialize Glew library for GL Extensions if needed
     GlfGlewInit();
@@ -72,6 +72,13 @@ void _InitGL()
 
     // Initialize GL context caps based on shared context
     GlfContextCaps::InitInstance();
+}
+
+static
+void _InitGL() {
+    static std::once_flag initFlag;
+
+    std::call_once(initFlag, _InitGLOnce);
 }
 
 static
@@ -130,9 +137,7 @@ UsdImagingGLEngine::UsdImagingGLEngine()
     , _restoreViewport(0)
     , _useFloatPointDrawTarget(false)
 {
-    static std::once_flag initFlag;
-
-    std::call_once(initFlag, _InitGL);
+    _InitGL();
 
     if (IsHydraEnabled()) {
 
@@ -170,6 +175,7 @@ UsdImagingGLEngine::UsdImagingGLEngine(
     , _restoreViewport(0)
     , _useFloatPointDrawTarget(false)
 {
+    _InitGL();
     if (IsHydraEnabled()) {
 
         // _renderIndex, _taskController, and _delegate are initialized
