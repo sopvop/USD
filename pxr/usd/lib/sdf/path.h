@@ -302,6 +302,7 @@ public:
     
     /// Constructs the default, empty path.
     ///
+    SDF_API
     constexpr SdfPath() = default;
 
     /// Creates a path from the given string.
@@ -406,6 +407,7 @@ public:
     SDF_API bool IsExpressionPath() const;
 
     /// Returns true if this is the empty path (SdfPath::EmptyPath()).
+    SDF_API
     inline bool IsEmpty() const noexcept {
         return *this == SdfPath();
     }
