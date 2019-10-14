@@ -423,8 +423,10 @@ protected:
     static bool _UpdateHydraCollection(HdRprimCollection *collection,
                           SdfPathVector const& roots,
                           UsdImagingGLRenderParams const& params);
+    USDIMAGINGGL_API
     static HdxRenderTaskParams _MakeHydraUsdImagingGLRenderParams(
                           UsdImagingGLRenderParams const& params);
+    USDIMAGINGGL_API
     static void _ComputeRenderTags(UsdImagingGLRenderParams const& params,
                           TfTokenVector *renderTags);
 
@@ -432,6 +434,7 @@ protected:
     // the task controller, and the usd imaging delegate.
     void _DeleteHydraResources();
 
+    USDIMAGINGGL_API
     static TfToken _GetDefaultRendererPluginId();
 
     // Creates and binds the internal draw-target that Hydra draws into.
