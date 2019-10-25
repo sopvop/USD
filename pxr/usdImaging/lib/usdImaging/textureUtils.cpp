@@ -57,12 +57,8 @@ UsdImaging_GetUdimTiles(
             ? SdfComputeAssetPathRelativeToLayer(
                 layerHandle, TfStringPrintf(formatString.c_str(), t))
             : TfStringPrintf(formatString.c_str(), t);
-        std::string resolved = resolver.Resolve(path);
-        if (resolved.empty()) {
-            continue;
-        }
-        if (resolver.FetchToLocalResolvedPath(path, resolved)) {
-            ret.emplace_back(t - startTile, TfToken(resolved));
+        if (!resolver.Resolve(path).empty()) {
+            ret.emplace_back(t - startTile, TfToken(path));
         }
     }
     ret.shrink_to_fit();
