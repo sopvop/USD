@@ -48,10 +48,12 @@ UsdImaging_GetUdimTiles(
     ArResolver& resolver = ArGetResolver();
 
     constexpr int startTile = 1001;
+    constexpr int lastTile = 1005;
     const int endTile = startTile + tileLimit;
     std::vector<std::tuple<int, TfToken>> ret;
     ret.reserve(tileLimit);
-    for (int t = startTile; t <= endTile; ++t) {
+    bool lastExists = false;
+    for (int t = startTile; t <= lastTile || (lastExists && t <= endTile); ++t) {
         const std::string path =
             layerHandle
             ? SdfComputeAssetPathRelativeToLayer(
@@ -59,6 +61,9 @@ UsdImaging_GetUdimTiles(
             : TfStringPrintf(formatString.c_str(), t);
         if (!resolver.Resolve(path).empty()) {
             ret.emplace_back(t - startTile, TfToken(path));
+            lastExists = true;
+        } else {
+            lastExists = false;
         }
     }
     ret.shrink_to_fit();
