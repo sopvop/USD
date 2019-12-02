@@ -33,7 +33,7 @@ PXR_NAMESPACE_OPEN_SCOPE
 
 static const char UDIM_PATTERN[] = "<UDIM>";
 static const int UDIM_START_TILE = 1001;
-static const int UDIM_END_TILE = 1100;
+static const int UDIM_END_TILE = 1005;
 static const std::string::size_type UDIM_TILE_NUMBER_LENGTH = 4;
 
 // We need to find the first layer that changes the value

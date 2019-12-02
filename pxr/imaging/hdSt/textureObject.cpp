@@ -803,15 +803,18 @@ _FindUdimTiles(const std::string &filePath)
 
     ArResolver& resolver = ArGetResolver();
     
-    for (int i = UDIM_START_TILE; i < UDIM_END_TILE; i++) {
+    bool lastExists = false;
+    for (int i = UDIM_START_TILE; i < 1005 || (lastExists && i < UDIM_END_TILE); i++) {
         // Add integer between prefix and suffix and see whether
         // the tile exists by consulting the resolver.
+        lastExists = false;
         const std::string resolvedPath =
             resolver.Resolve(
                 splitPath.first + std::to_string(i) + splitPath.second);
         if (!resolvedPath.empty()) {
             // Record pair in result.
             result.emplace_back(i - UDIM_START_TILE, resolvedPath);
+            lastExists = true;
         }
     }
 
