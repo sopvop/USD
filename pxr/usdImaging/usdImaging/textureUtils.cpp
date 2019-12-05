@@ -86,7 +86,8 @@ UsdImaging_UdimTilesExist(
     ArResolver& resolver = ArGetResolver();
 
     constexpr int startTile = 1001;
-    const int endTile = startTile + tileLimit;
+    constexpr int lastTile = 1005;
+    const int endTile = std::min(lastTile, startTile + tileLimit);
     for (int t = startTile; t <= endTile; ++t) {
         const std::string path =
             layerHandle
