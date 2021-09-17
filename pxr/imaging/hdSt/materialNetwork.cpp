@@ -532,6 +532,22 @@ _ResolveAssetPath(VtValue const& value)
 
     return std::string();
 }
+static std::string
+_GetAssetPath(VtValue const& value)
+{
+    // Note that the SdfAssetPath should really be resolved into an ArAsset via
+    // ArGetResolver (Eg. USDZ). Using GetResolvePath directly isn't sufficient.
+    // Texture loading in Storm goes via Glf, which will handle the ArAsset
+    // resolution already, so we skip doing it here and simply use the string.
+    if (value.IsHolding<SdfAssetPath>()) {
+        SdfAssetPath p = value.Get<SdfAssetPath>();
+        return p.GetAssetPath();
+    } else if (value.IsHolding<std::string>()) {
+        return value.UncheckedGet<std::string>();
+    }
+
+    return std::string();
+}
 
 // Look up value from material node parameters and fallback to
 // corresponding value on given SdrNode.
@@ -820,10 +836,11 @@ _MakeMaterialParamsForTexture(
                 textureId = v.UncheckedGet<HdStTextureIdentifier>();
             } else if (v.IsHolding<std::string>() ||
                        v.IsHolding<SdfAssetPath>()) {
-                const std::string filePath = _ResolveAssetPath(v);
+                std::string filePath = _ResolveAssetPath(v);
 
                 if (HdStIsSupportedUdimTexture(filePath)) {
                     texParam.textureType = HdTextureType::Udim;
+                    filePath = _GetAssetPath(v);
                 }
                 
                 useTexturePrimToFindTexture = false;
