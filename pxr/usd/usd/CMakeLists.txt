@@ -13,12 +13,8 @@ pxr_library(usd
         trace
         vt
         work
-        ${Boost_PYTHON_LIBRARY}
-        ${TBB_tbb_LIBRARY}
-
-    INCLUDE_DIRS
-        ${Boost_INCLUDE_DIRS}
-        ${TBB_INCLUDE_DIRS}
+        Boost::python
+        TBB::tbb
 
     PUBLIC_CLASSES
         apiSchemaBase
@@ -377,7 +373,7 @@ pxr_build_test(testUsdStageThreading
         work
         sdf
         usd
-        ${Boost_PROGRAM_OPTIONS_LIBRARY}
+        Boost::program_options
     CPPFILES
         testenv/testUsdStageThreading.cpp
 )

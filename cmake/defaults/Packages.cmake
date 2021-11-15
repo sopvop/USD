@@ -67,9 +67,10 @@ if(PXR_ENABLE_PYTHON_SUPPORT)
         find_package(PythonInterp 3.0 REQUIRED)
         find_package(PythonLibs 3.0 REQUIRED)
     else()
-        find_package(PythonInterp 2.7 REQUIRED)
-        find_package(PythonLibs 2.7 REQUIRED)
+        find_package(Python 2.7 REQUIRED COMPONENTS Interpreter Development)
     endif()
+
+    set(PYTHON_EXECUTABLE ${Python_EXECUTABLE})
 
     # This option indicates that we don't want to explicitly link to the python
     # libraries. See BUILDING.md for details.
@@ -93,13 +94,14 @@ if(PXR_ENABLE_PYTHON_SUPPORT)
         # Find the component under the versioned name and then set the generic
         # Boost_PYTHON_LIBRARY variable so that we don't have to duplicate this
         # logic in each library's CMakeLists.txt.
-        set(python_version_nodot "${PYTHON_VERSION_MAJOR}${PYTHON_VERSION_MINOR}")
+        set(python_version_nodot "${Python_VERSION_MAJOR}${Python_VERSION_MINOR}")
         find_package(Boost
             COMPONENTS
                 python${python_version_nodot}
             REQUIRED
         )
-        set(Boost_PYTHON_LIBRARY "${Boost_PYTHON${python_version_nodot}_LIBRARY}")
+        target_link_libraries(Boost::python${python_version_nodot} INTERFACE Python::Python)
+        add_library(Boost::python ALIAS Boost::python${python_version_nodot})
     else()
         find_package(Boost
             COMPONENTS

@@ -288,6 +288,11 @@ if(NOT TBB_FOUND)
     set_target_properties(TBB::tbb PROPERTIES
           INTERFACE_INCLUDE_DIRECTORIES  ${TBB_INCLUDE_DIRS}
           IMPORTED_LOCATION              ${TBB_LIBRARIES})
+
+    #Needed for GCC .so INPUT redirect linker script
+    get_filename_component(libdir ${TBB_LIBRARIES} DIRECTORY)
+    target_link_directories(TBB::tbb INTERFACE ${libdir})
+
     if(TBB_LIBRARIES_RELEASE AND TBB_LIBRARIES_DEBUG)
       set_target_properties(TBB::tbb PROPERTIES
           INTERFACE_COMPILE_DEFINITIONS "$<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:TBB_USE_DEBUG=1>"
