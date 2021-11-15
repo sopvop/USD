@@ -20,6 +20,14 @@ install(FILES
   "${PROJECT_BINARY_DIR}/pxrConfig.cmake"
   DESTINATION "${CMAKE_INSTALL_PREFIX}"
 )
+install(
+  FILES
+    ${PROJECT_SOURCE_DIR}/cmake/modules/FindOpenSubdiv.cmake
+    ${PROJECT_SOURCE_DIR}/cmake/modules/FindPTex.cmake
+    ${PROJECT_SOURCE_DIR}/cmake/modules/FindTBB.cmake
+  DESTINATION
+    "${CMAKE_INSTALL_PREFIX}/cmake/modules"
+)
 
 if (NOT PXR_BUILD_MONOLITHIC)
     install(EXPORT pxrTargets DESTINATION "cmake")
