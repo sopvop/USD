@@ -14,11 +14,10 @@ pxr_plugin(${PXR_PACKAGE}
         usd
         usdGeom
         ${DRACO_LIBRARY}
+        Boost::python
 
     INCLUDE_DIRS
-        ${Boost_INCLUDE_DIRS}
         ${DRACO_INCLUDES}
-        ${PYTHON_INCLUDE_DIRS}
 
     CPPFILES
         attributeDescriptor.cpp

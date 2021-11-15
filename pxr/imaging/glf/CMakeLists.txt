@@ -16,8 +16,7 @@ set(optionalLibs "")
 set(optionalIncludeDirs "")
 if (PXR_ENABLE_PTEX_SUPPORT)
     list(APPEND optionalPublicClasses ptexMipmapTextureLoader)
-    list(APPEND optionalLibs ${PTEX_LIBRARY})
-    list(APPEND optionalIncludeDirs ${PTEX_INCLUDE_DIR})
+    list(APPEND optionalLibs Ptex::Ptex)
 endif()
 
 if (PXR_ENABLE_OPENVDB_SUPPORT)
@@ -38,16 +37,14 @@ pxr_library(glf
         tf
         trace
         sdf
-        ${Boost_PYTHON_LIBRARY}
+        Boost::python
+        GLEW::GLEW
         ${OPENGL_gl_LIBRARY}
         ${OPENGL_glu_LIBRARY}
-        ${GLEW_LIBRARY}
         ${X11_LIBRARIES}
         ${optionalLibs}
 
     INCLUDE_DIRS
-        ${Boost_INCLUDE_DIRS}
-        ${GLEW_INCLUDE_DIR}
         ${optionalIncludeDirs}
 
     PUBLIC_CLASSES

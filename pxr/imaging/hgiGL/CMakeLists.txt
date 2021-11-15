@@ -13,12 +13,11 @@ pxr_library(hgiGL
         hgi
         tf
         trace
-        ${GLEW_LIBRARY}
+        GLEW::GLEW
         ${OPENGL_gl_LIBRARY}
         ${OPENGL_glu_LIBRARY}
 
     INCLUDE_DIRS
-        ${GLEW_INCLUDE_DIR}
         ${OPENGL_INCLUDE_DIR}
 
     PRIVATE_CLASSES

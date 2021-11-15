@@ -28,7 +28,7 @@ pxr_library(hgiInterop
         gf
         tf
         hgi
-        ${GLEW_LIBRARY}
+        GLEW::GLEW
         ${OPENGL_gl_LIBRARY}
         ${OPENGL_glu_LIBRARY}
         ${optionalLibraries}

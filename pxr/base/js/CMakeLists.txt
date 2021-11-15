@@ -4,9 +4,7 @@ set(PXR_PACKAGE js)
 pxr_library(js
     LIBRARIES
         tf
-
-    INCLUDE_DIRS
-        ${Boost_INCLUDE_DIRS}
+        Boost::boost
 
     PUBLIC_CLASSES
         json

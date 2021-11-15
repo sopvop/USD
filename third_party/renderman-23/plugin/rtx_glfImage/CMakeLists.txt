@@ -8,9 +8,9 @@ pxr_plugin(${PXR_PACKAGE}
         glf
         ${PXRCORE_LIBRARY}
         ${PRMAN_LIBRARY}
+        GLEW::GLEW
 
     INCLUDE_DIRS
-        ${GLEW_INCLUDE_DIR}    
         ${RENDERMAN_INCLUDE_DIR}
 
     CPPFILES

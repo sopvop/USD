@@ -26,12 +26,8 @@ pxr_library(hdSt
         sdr
         tf
         trace
-        ${GLEW_LIBRARY}
-        ${OPENSUBDIV_LIBRARIES}
-
-    INCLUDE_DIRS
-        ${GLEW_INCLUDE_DIR}
-        ${OPENSUBDIV_INCLUDE_DIR}
+        GLEW::GLEW
+        OpenSubdiv::OpenSubdiv
 
     PUBLIC_CLASSES
         basisCurves

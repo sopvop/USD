@@ -31,11 +31,10 @@ pxr_library(hdx
         hgiInterop
         cameraUtil
         sdf
-        ${GLEW_LIBRARY}
+        GLEW::GLEW
         ${optionalLibs}
 
     INCLUDE_DIRS
-        ${GLEW_INCLUDE_DIR}
         ${optionalIncludeDirs}
 
     PUBLIC_CLASSES

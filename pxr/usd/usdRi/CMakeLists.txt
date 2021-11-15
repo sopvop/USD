@@ -10,10 +10,7 @@ pxr_library(usdRi
         usdShade
         usdGeom
         usdLux
-        ${Boost_PYTHON_LIBRARY}
-
-    INCLUDE_DIRS
-        ${Boost_INCLUDE_DIRS}
+        Boost::python
 
     PUBLIC_CLASSES
         lightAPI

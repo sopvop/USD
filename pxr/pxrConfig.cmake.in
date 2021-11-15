@@ -11,6 +11,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PXR_CMAKE_DIR}/cmake/modules)
 
 include(CMakeFindDependencyMacro)
 
+find_dependency(GLEW)
 find_dependency(OpenSubdiv 3)
 find_dependency(PTex)
 
@@ -35,7 +36,6 @@ set(PXR_MAJOR_VERSION "@PXR_MAJOR_VERSION@")
 set(PXR_MINOR_VERSION "@PXR_MINOR_VERSION@")
 set(PXR_PATCH_VERSION "@PXR_PATCH_VERSION@")
 set(PXR_VERSION "@PXR_VERSION@")
-
 
 include("${PXR_CMAKE_DIR}/cmake/pxrTargets.cmake")
 set(libs "@PXR_ALL_LIBS@")
