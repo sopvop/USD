@@ -7,6 +7,36 @@
 
 get_filename_component(PXR_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PXR_CMAKE_DIR}/cmake/modules)
+
+include(CMakeFindDependencyMacro)
+
+find_dependency(OpenSubdiv 3)
+find_dependency(PTex)
+
+set(PXR_PYTHON_VERSION "@Python_VERSION_MAJOR@.@Python_VERSION_MINOR@")
+find_dependency(
+  Python ${PXR_PYTHON_VERSION}
+  REQUIRED COMPONENTS Development
+)
+
+set(_nodot_py "@Python_VERSION_MAJOR@@Python_VERSION_MINOR@")
+if (Boost_NO_BOOST_CMAKE)
+  find_dependency(Boost @Boost_VERSION_STRING@ REQUIRED COMPONENTS python)
+  add_library(Boost::python ALIAS Boost::python${_nodot_py})
+else()
+  find_dependency(Boost @Boost_VERSION_STRING@ REQUIRED COMPONENTS python)
+  add_library(Boost::python${_nodot_py} ALIAS Boost::python)
+endif()
+
+find_dependency(TBB @TBB_VERSION@ REQUIRED)
+
+set(PXR_MAJOR_VERSION "@PXR_MAJOR_VERSION@")
+set(PXR_MINOR_VERSION "@PXR_MINOR_VERSION@")
+set(PXR_PATCH_VERSION "@PXR_PATCH_VERSION@")
+set(PXR_VERSION "@PXR_VERSION@")
+
+
 include("${PXR_CMAKE_DIR}/cmake/pxrTargets.cmake")
 set(libs "@PXR_ALL_LIBS@")
 set(PXR_LIBRARIES "")
