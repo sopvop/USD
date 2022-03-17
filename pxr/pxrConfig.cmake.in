@@ -35,12 +35,9 @@ find_package(
 )
 
 set(_nodot_py "@Python_VERSION_MAJOR@@Python_VERSION_MINOR@")
-if (Boost_NO_BOOST_CMAKE)
-  find_package(Boost @Boost_VERSION_STRING@ REQUIRED COMPONENTS python)
+find_package(Boost @Boost_VERSION_STRING@ COMPONENTS REQUIRED python${_nodot_py})
+if (NOT TARGET Boost::python)
   add_library(Boost::python ALIAS Boost::python${_nodot_py})
-else()
-  find_package(Boost @Boost_VERSION_STRING@ REQUIRED COMPONENTS python)
-  add_library(Boost::python${_nodot_py} ALIAS Boost::python)
 endif()
 
 find_package(TBB @TBB_VERSION@ REQUIRED)
