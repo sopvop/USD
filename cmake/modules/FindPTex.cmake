@@ -14,6 +14,7 @@
 # You may obtain a copy of the License at
 # http://www.apache.org/licenses/LICENSE-2.0
 
+find_package(ZLIB REQUIRED)
 
 if (WIN32)
     find_path( PTEX_INCLUDE_DIR
@@ -128,6 +129,12 @@ set_target_properties(
 target_include_directories(
   Ptex::Ptex
   SYSTEM INTERFACE ${PTEX_INCLUDE_DIR}
+)
+
+target_link_libraries(
+    Ptex::Ptex
+  INTERFACE
+    ZLIB::ZLIB
 )
 
 include(FindPackageHandleStandardArgs)
