@@ -11,9 +11,7 @@ pxr_library(hio
         trace
         ar
         hf
-
-    INCLUDE_DIRS
-        ${Boost_INCLUDE_DIRS}
+        Boost::boost
 
     PUBLIC_CLASSES
         fieldTextureData

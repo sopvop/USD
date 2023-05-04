@@ -288,6 +288,11 @@ if(NOT TBB_FOUND)
     set_target_properties(TBB::tbb PROPERTIES
           INTERFACE_INCLUDE_DIRECTORIES  ${TBB_INCLUDE_DIRS}
           IMPORTED_LOCATION              ${TBB_LIBRARIES})
+
+    #Needed for GCC .so INPUT redirect linker script
+    get_filename_component(libdir ${TBB_LIBRARIES} DIRECTORY)
+    target_link_directories(TBB::tbb INTERFACE ${libdir})
+
     if(TBB_LIBRARIES_RELEASE AND TBB_LIBRARIES_DEBUG)
       set_target_properties(TBB::tbb PROPERTIES
           INTERFACE_COMPILE_DEFINITIONS "$<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:TBB_USE_DEBUG=1>"
@@ -295,13 +300,22 @@ if(NOT TBB_FOUND)
           IMPORTED_LOCATION_RELWITHDEBINFO ${TBB_LIBRARIES_DEBUG}
           IMPORTED_LOCATION_RELEASE        ${TBB_LIBRARIES_RELEASE}
           IMPORTED_LOCATION_MINSIZEREL     ${TBB_LIBRARIES_RELEASE}
+          IMPORTED_IMPLIB_DEBUG          ${TBB_LIBRARIES_DEBUG}
+          IMPORTED_IMPLIB_RELWITHDEBINFO ${TBB_LIBRARIES_DEBUG}
+          IMPORTED_IMPLIB_RELEASE        ${TBB_LIBRARIES_RELEASE}
+          IMPORTED_IMPLIB_MINSIZEREL     ${TBB_LIBRARIES_RELEASE}
+
           )
     elseif(TBB_LIBRARIES_RELEASE)
-      set_target_properties(TBB::tbb PROPERTIES IMPORTED_LOCATION ${TBB_LIBRARIES_RELEASE})
+      set_target_properties(TBB::tbb PROPERTIES
+        IMPORTED_LOCATION ${TBB_LIBRARIES_RELEASE}
+        IMPORTED_IMPLIB ${TBB_LIBRARIES_RELEASE}
+      )
     else()
       set_target_properties(TBB::tbb PROPERTIES
           INTERFACE_COMPILE_DEFINITIONS "${TBB_DEFINITIONS_DEBUG}"
           IMPORTED_LOCATION              ${TBB_LIBRARIES_DEBUG}
+          IMPORTED_IMPLIB                ${TBB_LIBRARIES_DEBUG}
           )
     endif()
   endif()

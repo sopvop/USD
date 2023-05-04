@@ -6,12 +6,9 @@ pxr_library(pxOsd
         tf
         gf
         vt
-        ${OPENSUBDIV_LIBRARIES}
-        ${Boost_PYTHON_LIBRARY}
+        OpenSubdiv::OpenSubdiv
+        Boost::python
 
-    INCLUDE_DIRS
-        ${OPENSUBDIV_INCLUDE_DIR}
-        
     PUBLIC_HEADERS
         api.h
 

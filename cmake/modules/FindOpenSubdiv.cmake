@@ -119,9 +119,26 @@ ENDIF(OPENSUBDIV_FOUND)
 MARK_AS_ADVANCED(
   OPENSUBDIV_INCLUDE_DIR
 )
+
+add_library(OpenSubdiv::OpenSubdiv INTERFACE IMPORTED)
+
 FOREACH(COMPONENT ${_opensubdiv_FIND_COMPONENTS})
   STRING(TOUPPER ${COMPONENT} UPPERCOMPONENT)
   MARK_AS_ADVANCED(OPENSUBDIV_${UPPERCOMPONENT}_LIBRARY)
+  add_library(OpenSubdiv::${COMPONENT} UNKNOWN IMPORTED)
+
+  set_target_properties(
+      OpenSubdiv::${COMPONENT}
+      PROPERTIES
+        IMPORTED_LOCATION ${OPENSUBDIV_${UPPERCOMPONENT}_LIBRARY}
+  )
+  target_include_directories(
+       OpenSubdiv::${COMPONENT}
+       SYSTEM INTERFACE ${OPENSUBDIV_INCLUDE_DIR}
+  )
+  target_link_libraries(OpenSubdiv::OpenSubdiv
+    INTERFACE OpenSubdiv::${COMPONENT}
+  )
 ENDFOREACH()
 
 # handle the QUIETLY and REQUIRED arguments and set OPENSUBDIV_FOUND to TRUE if

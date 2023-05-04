@@ -25,12 +25,8 @@ pxr_plugin(hdStorm
         work
         hd
         hdSt
-        ${OPENSUBDIV_LIBRARIES}
-        ${TBB_tbb_LIBRARY}
-
-    INCLUDE_DIRS
-        ${TBB_INCLUDE_DIRS}
-        ${OPENSUBDIV_INCLUDE_DIR}
+        OpenSubdiv::OpenSubdiv
+        TBB::tbb
 
     PUBLIC_CLASSES
         rendererPlugin
