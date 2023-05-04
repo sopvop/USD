@@ -32,7 +32,7 @@ if (${PXR_ENABLE_MATERIALX_SUPPORT})
     )
 endif()
 if (PXR_ENABLE_PTEX_SUPPORT)
-    list(APPEND optionalLibs Ptex::Ptex)
+    list(APPEND optionalLibs Ptex::Ptex_static)
     list(APPEND optionalPublicClasses ptexMipmapTextureLoader)
 endif()
 
