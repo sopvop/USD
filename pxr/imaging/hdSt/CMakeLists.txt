@@ -28,8 +28,7 @@ if (${PXR_ENABLE_MATERIALX_SUPPORT})
     )
 endif()
 if (PXR_ENABLE_PTEX_SUPPORT)
-    list(APPEND optionalLibs ${PTEX_LIBRARY})
-    list(APPEND optionalIncludeDirs ${PTEX_INCLUDE_DIR})
+    list(APPEND optionalLibs Ptex::Ptex_static)
     list(APPEND optionalPublicClasses ptexMipmapTextureLoader)
 endif()
 
@@ -45,11 +44,10 @@ pxr_library(hdSt
         sdr
         tf
         trace
-        ${OPENSUBDIV_LIBRARIES}
+        OpenSubdiv::OpenSubdiv
         ${optionalLibs}
 
     INCLUDE_DIRS
-        ${OPENSUBDIV_INCLUDE_DIR}
         ${optionalIncludeDirs}
 
     PUBLIC_CLASSES

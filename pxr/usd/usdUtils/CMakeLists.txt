@@ -10,10 +10,7 @@ pxr_library(usdUtils
         usd
         usdGeom
         usdShade
-        ${Boost_PYTHON_LIBRARY}
-
-    INCLUDE_DIRS
-        ${Boost_INCLUDE_DIRS}
+        Boost::python
 
     PUBLIC_CLASSES
         authoring

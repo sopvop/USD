@@ -9,6 +9,13 @@
 # PXR_foo_LIBRARY   - Absolute path to individual libraries.
 # The preprocessor definition PXR_STATIC will be defined if appropriate
 
+include(CMakeFindDependencyMacro)
+
+find_dependency(OpenSubdiv 3)
+find_dependency(PTex)
+find_dependency(Python @Python_VERSION_MAJOR@.@Python_VERSION_MINOR@)
+find_dependency(Boost @Boost_VERSION_STRING@)
+
 get_filename_component(PXR_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
 
 set(PXR_MAJOR_VERSION "@PXR_MAJOR_VERSION@")

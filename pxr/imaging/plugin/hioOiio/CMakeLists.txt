@@ -22,12 +22,8 @@ pxr_plugin(hioOiio
         gf
         hio
         tf
-        ${OIIO_LIBRARIES}
-        ${__OIIO_IMATH_LIBS}
-
-    INCLUDE_DIRS
-        ${OIIO_INCLUDE_DIRS}
-        ${__OIIO_IMATH_INCLUDE}
+        OpenImageIO::OpenImageIO
+        OpenEXR::IlmImf
 
     CPPFILES
         oiioImage.cpp
