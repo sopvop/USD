@@ -27,13 +27,12 @@ pxr_library(glf
         tf
         trace
         sdf
-        ${Boost_PYTHON_LIBRARY}
+        Boost::python
         ${OPENGL_gl_LIBRARY}
         ${X11_LIBRARIES}
         ${optionalLibs}
 
     INCLUDE_DIRS
-        ${Boost_INCLUDE_DIRS}
         ${optionalIncludeDirs}
 
     PUBLIC_CLASSES

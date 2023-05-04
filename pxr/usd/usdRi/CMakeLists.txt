@@ -9,10 +9,8 @@ pxr_library(usdRi
         usd
         usdShade
         usdGeom
-        ${Boost_PYTHON_LIBRARY}
-
-    INCLUDE_DIRS
-        ${Boost_INCLUDE_DIRS}
+        usdLux
+        Boost::python
 
     PUBLIC_CLASSES
         materialAPI

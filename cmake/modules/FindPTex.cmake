@@ -117,6 +117,19 @@ elseif (PTEX_INCLUDE_DIR AND EXISTS "${PTEX_INCLUDE_DIR}/Ptexture.h" )
 
 endif()
 
+add_library(Ptex::Ptex UNKNOWN IMPORTED)
+
+set_target_properties(
+  Ptex::Ptex
+  PROPERTIES
+  IMPORTED_LOCATION ${PTEX_LIBRARY}
+)
+
+target_include_directories(
+  Ptex::Ptex
+  SYSTEM INTERFACE ${PTEX_INCLUDE_DIR}
+)
+
 include(FindPackageHandleStandardArgs)
 
 find_package_handle_standard_args(PTex

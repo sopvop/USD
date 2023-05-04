@@ -6,12 +6,8 @@ pxr_library(trace
         arch
         js
         tf
-        ${Boost_PYTHON_LIBRARY}
-        ${TBB_tbb_LIBRARY}
-
-    INCLUDE_DIRS
-        ${Boost_INCLUDE_DIRS}
-        ${TBB_INCLUDE_DIRS}
+        Boost::python
+        TBB::tbb
 
     PUBLIC_CLASSES
         aggregateTree

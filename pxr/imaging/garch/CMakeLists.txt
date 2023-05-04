@@ -29,9 +29,9 @@ pxr_library(garch
         ${X11_LIBRARIES}
         ${OPENGL_gl_LIBRARY}
         ${GARCH_PLATFORM_LIBRARIES}
+        ${APPKIT_LIBRARY}
+        Boost::boost
 
-    INCLUDE_DIRS
-        ${Boost_INCLUDE_DIRS}
 
     PUBLIC_CLASSES
         glApi

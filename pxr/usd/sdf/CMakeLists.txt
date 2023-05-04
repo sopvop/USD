@@ -10,10 +10,7 @@ pxr_library(sdf
         vt
         work
         ar
-        ${Boost_PYTHON_LIBRARY}
-
-    INCLUDE_DIRS
-        ${Boost_INCLUDE_DIRS}
+        Boost::python
 
     PUBLIC_CLASSES
         abstractData
@@ -336,6 +333,7 @@ pxr_build_test(testSdfPathThreading
     LIBRARIES
         sdf
         tf
+        Boost::program_options
     CPPFILES
         testenv/testSdfPathThreading.cpp
 )

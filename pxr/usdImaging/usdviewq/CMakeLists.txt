@@ -11,10 +11,7 @@ pxr_library(usdviewq
         usd
         usdGeom
         hd
-        ${Boost_PYTHON_LIBRARY}
-
-    INCLUDE_DIRS
-        ${Boost_INCLUDE_DIRS}
+        Boost::python
 
     PUBLIC_CLASSES
         hydraObserver

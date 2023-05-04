@@ -7,4 +7,5 @@ pxr_cpp_bin(sdfdump
         plug
         tf
         sdf
+        Boost::program_options
 )
