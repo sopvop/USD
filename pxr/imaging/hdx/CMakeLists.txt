@@ -11,8 +11,7 @@ endif()
 
 set (optionalCppFiles "")
 if (PXR_BUILD_OPENCOLORIO_PLUGIN)
-    list(APPEND optionalLibs ${OCIO_LIBRARIES})
-    list(APPEND optionalIncludeDirs ${OCIO_INCLUDE_DIRS})
+    list(APPEND optionalLibs OpenColorIO::OpenColorIO)
 endif()
 
 pxr_library(hdx

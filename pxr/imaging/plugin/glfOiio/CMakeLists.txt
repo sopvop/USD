@@ -14,12 +14,8 @@ pxr_plugin(glfOiio
         gf
         glf
         tf
-        ${OIIO_LIBRARIES}
-        ${OPENEXR_LIBRARY}
-
-    INCLUDE_DIRS
-        ${OIIO_INCLUDE_DIRS}
-        ${OPENEXR_INCLUDE_DIRS}
+        OpenImageIO::OpenImageIO
+        OpenEXR::IlmImf
 
     CPPFILES
         oiioImage.cpp
