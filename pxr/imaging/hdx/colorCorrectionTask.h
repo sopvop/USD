@@ -40,7 +40,7 @@
 
 PXR_NAMESPACE_OPEN_SCOPE
 
-
+class HgiGraphicsCmds;
 /// \class HdxColorCorrectionTask
 ///
 /// A task for performing color correction (and optionally color grading) on a 
@@ -85,11 +85,18 @@ private:
     // Utility function to create the GL program for color correction
     bool _CreateShaderResources();
 
+    // OCIO version-specific code for shader code generation.
+    std::string _CreateOpenColorIOShaderCode(std::string &ocioGpuShaderText,
+                                             HgiShaderFunctionDesc &fragDesc);
+
     // Utility function to create buffer resources.
     bool _CreateBufferResources();
 
     // Utility to create resource bindings
     bool _CreateResourceBindings(HgiTextureHandle const& aovTexture);
+
+    // OCIO version-specific code for setting LUT bindings.
+    void _CreateOpenColorIOLUTBindings(HgiResourceBindingsDesc &resourceDesc);
 
     // Utility to create a pipeline
     bool _CreatePipeline(HgiTextureHandle const& aovTexture);
@@ -99,6 +106,9 @@ private:
 
     // Apply color correction to the currently bound framebuffer.
     void _ApplyColorCorrection(HgiTextureHandle const& aovTexture);
+
+    // OCIO version-specific code for setting constants.
+    void _SetConstants(HgiGraphicsCmds *gfxCmds);
 
     // Destroy shader program and the shader functions it holds.
     void _DestroyShaderProgram();
@@ -111,6 +121,27 @@ private:
     HgiBufferHandle _vertexBuffer;
     HgiTextureHandle _texture3dLUT;
     HgiSamplerHandle _sampler;
+
+    struct TextureSamplerInfo
+    {
+        unsigned char    dim;
+        std::string      texName;
+        HgiTextureHandle texHandle;
+        std::string      samplerName;
+        HgiSamplerHandle samplerHandle;
+    };
+    std::vector<TextureSamplerInfo> _textureLUTs;
+
+    struct BufferInfo
+    {
+        std::string      typeName;
+        std::string      name;
+        uint32_t         count;
+        HgiBufferHandle  handle;
+    };
+    std::vector<BufferInfo>    _bufferConstants;
+    std::vector<unsigned char> _constantValues;
+
     HgiShaderProgramHandle _shaderProgram;
     HgiResourceBindingsHandle _resourceBindings;
     HgiGraphicsPipelineHandle _pipeline;

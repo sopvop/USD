@@ -1710,7 +1710,12 @@ class AppController(QtCore.QObject):
         def setOcioConfig(action):
             display = str(action.parent().title())
             view = str(action.text())
-            colorSpace = config.getDisplayColorSpaceName(display, view)
+            if hasattr(config, 'getDisplayViewColorSpaceName'):
+                # OCIO version 2
+                colorSpace = config.getDisplayViewColorSpaceName(display, view)
+            else:
+                # OCIO version 1
+                colorSpace = config.getDisplayColorSpaceName(display, view)
             self._dataModel.viewSettings.setOcioSettings(colorSpace,\
                 display, view)
             self._dataModel.viewSettings.colorCorrectionMode =\
