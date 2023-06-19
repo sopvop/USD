@@ -41,7 +41,7 @@
 
 PXR_NAMESPACE_OPEN_SCOPE
 
-
+class HgiGraphicsCmds;
 /// \class HdxColorCorrectionTask
 ///
 /// A task for performing color correction (and optionally color grading) on a

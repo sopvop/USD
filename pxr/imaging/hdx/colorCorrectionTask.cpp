@@ -348,7 +348,7 @@ HdxColorCorrectionTask::_CreateOpenColorIOLUTBindings(
         HgiTextureBindDesc texBind1;
         texBind1.bindingIndex = 1;
         texBind1.stageUsage = HgiShaderStageFragment;
-        texBind1.writable = false;
+        //texBind1.writable = false;
         texBind1.textures.push_back(_texture3dLUT);
         texBind1.samplers.push_back(_sampler);
         resourceDesc.textures.push_back(std::move(texBind1));
@@ -415,10 +415,10 @@ HdxColorCorrectionTask::_CreateOpenColorIOResources()
                 OCIO::GpuShaderDesc::CreateShaderDesc();
     shaderDesc->setFunctionName("OCIODisplay");
     const float *lutValues = nullptr;
-    shaderDesc->setLanguage(
-        _GetHgi()->GetAPIName() == HgiTokens->OpenGL ?
-                    OCIO::GPU_LANGUAGE_GLSL_4_0 :
-                    OCIO::GPU_LANGUAGE_MSL_2_0);
+    shaderDesc->setLanguage(OCIO::GPU_LANGUAGE_GLSL_4_0);
+    //    _GetHgi()->GetAPIName() == HgiTokens->OpenGL ?
+    //                OCIO::GPU_LANGUAGE_GLSL_4_0 :
+    //                OCIO::GPU_LANGUAGE_MSL_2_0);
 
     gpuProcessor->extractGpuShaderInfo(shaderDesc);
 
@@ -599,7 +599,7 @@ HdxColorCorrectionTask::_CreateOpenColorIOShaderCode(
     int bindingIdx = 1;
     for(TextureSamplerInfo const &texInfo : _textureLUTs) {
         HgiShaderFunctionAddTexture(
-            &fragDesc, texInfo.texName, bindingIdx, texInfo.dim);
+            &fragDesc, texInfo.texName, texInfo.dim);
         ++bindingIdx;
         if(_GetHgi()->GetAPIName() == HgiTokens->Metal)
         {
@@ -687,7 +687,7 @@ HdxColorCorrectionTask::_CreateOpenColorIOLUTBindings(
         HgiTextureBindDesc texBind1;
         texBind1.bindingIndex = bindingIdx++;
         texBind1.stageUsage = HgiShaderStageFragment;
-        texBind1.writable = false;
+        //texBind1.writable = false;
         texBind1.textures.push_back(texSamp.texHandle);
         texBind1.samplers.push_back(texSamp.samplerHandle);
         resourceDesc.textures.push_back(std::move(texBind1));
@@ -699,7 +699,7 @@ HdxColorCorrectionTask::_CreateOpenColorIOLUTBindings(
             bufBind0.bindingIndex = bindingIdx++;
             bufBind0.resourceType = HgiBindResourceTypeUniformBuffer;
             bufBind0.stageUsage = HgiShaderStageFragment;
-            bufBind0.writable = false;
+            //bufBind0.writable = false;
             bufBind0.offsets.push_back(0);
             bufBind0.buffers.push_back(buff.handle);
             resourceDesc.buffers.push_back(std::move(bufBind0));
@@ -794,11 +794,11 @@ HdxColorCorrectionTask::_CreateShaderResources()
     HgiShaderFunctionAddStageInput(
         &fragDesc, "uvOut", "vec2");
     HgiShaderFunctionAddTexture(
-        &fragDesc, "colorIn", /*bindIndex = */0);
+        &fragDesc, "colorIn");
 #if OCIO_VERSION_HEX < 0x02000000
     if (useOCIO) {
         HgiShaderFunctionAddTexture(
-            &fragDesc, "Lut3DIn", /*bindIndex = */1, /*dimensions = */3);
+            &fragDesc, "Lut3DIn", /*dimensions = */3);
     }
 #endif
     HgiShaderFunctionAddStageOutput(
