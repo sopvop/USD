@@ -1390,6 +1390,9 @@ UsdImagingPointInstancerAdapter::GetScenePrimPath(
         return SdfPath();
     }
     VtIntArray const & indices = indicesValue.UncheckedGet<VtIntArray>();
+    if (indices.empty() || (instanceIndex % indices.size()) >= indices.size()) {
+        return SdfPath();
+    }
 
     // instanceIndex = parentIndex * indices.size() + i.
     int parentIndex = instanceIndex / indices.size();
