@@ -16,7 +16,6 @@ pxr_library(hgiGL
         trace
 
     PRIVATE_CLASSES
-        conversions
         diagnostic
         scopedStateHolder
         shaderGenerator
@@ -29,6 +28,7 @@ pxr_library(hgiGL
         computeCmds
         computePipeline
         contextArena
+        conversions
         debugCodes
         device
         garbageCollector
