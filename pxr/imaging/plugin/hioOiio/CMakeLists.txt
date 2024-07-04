@@ -23,7 +23,7 @@ pxr_plugin(hioOiio
         hio
         tf
         OpenImageIO::OpenImageIO
-        OpenEXR::IlmImf
+        OpenEXR::OpenEXR
 
     CPPFILES
         oiioImage.cpp

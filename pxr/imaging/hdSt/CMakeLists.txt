@@ -45,7 +45,7 @@ pxr_library(hdSt
         sdr
         tf
         trace
-        OpenSubdiv::OpenSubdiv
+        opensubdiv::opensubdiv
         ${optionalLibs}
 
     INCLUDE_DIRS
