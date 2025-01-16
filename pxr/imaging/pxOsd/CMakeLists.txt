@@ -6,7 +6,7 @@ pxr_library(pxOsd
         tf
         gf
         vt
-        opensubdiv::opensubdiv
+        OpenSubdiv::OpenSubdiv
         Boost::python
 
     PUBLIC_HEADERS

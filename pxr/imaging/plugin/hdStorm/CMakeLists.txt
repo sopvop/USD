@@ -25,7 +25,7 @@ pxr_plugin(hdStorm
         work
         hd
         hdSt
-        opensubdiv::opensubdiv
+        OpenSubdiv::OpenSubdiv
         TBB::tbb
 
     PUBLIC_CLASSES
