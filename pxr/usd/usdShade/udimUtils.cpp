@@ -90,8 +90,9 @@ std::vector<UsdShadeUdimUtils::ResolvedPathAndTile> _ResolveUdimPaths(
     }
 
     ArResolver& resolver = ArGetResolver();
-    
-    for (int i = UDIM_START_TILE; i <= UDIM_END_TILE; i++) {
+
+    bool lastExists = true;
+    for (int i = UDIM_START_TILE; i <= 1005 || (i <= UDIM_END_TILE && lastExists); i++) {
         const std::string tile = std::to_string(i);
 
         // Fill in integer
@@ -102,6 +103,7 @@ std::vector<UsdShadeUdimUtils::ResolvedPathAndTile> _ResolveUdimPaths(
         }
 
         path = resolver.Resolve(path);
+        lastExists = !path.empty();
         if (!path.empty()) {
             resolvedPaths.push_back(std::make_pair(path, tile));
 
